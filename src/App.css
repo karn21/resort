@@ -4,12 +4,12 @@
   box-sizing: border-box;
 }
 :root {
-  --primaryColor: #dd7631;
+  --primaryColor: #f5cd79;
   --mainWhite: #fff;
   --offWhite: #f7f7f7;
   --mainBlack: #222;
   --mainGrey: #ececec;
-  --darkGrey: #cfcfcf;
+  --darkGrey: #e5e5e5;
   --mainTransition: all 0.3s linear;
   --mainSpacing: 3px;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
@@ -64,6 +64,7 @@ h6 {
   transition: var(--mainTransition);
   text-transform: uppercase;
   cursor: pointer;
+  border-radius: 0.2rem;
 }
 .btn-primary:hover {
   background: transparent;
@@ -178,6 +179,7 @@ h6 {
   text-align: center;
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
+  border-radius: 0.5rem;
 }
 .banner h1 {
   font-size: 2.5rem;
