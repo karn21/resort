@@ -1,7 +1,8 @@
 import React from "react";
+import Hero from "../components/Hero";
 
 function Error() {
-  return <div>Error Page</div>;
+  return <Hero></Hero>;
 }
 
 export default Error;
