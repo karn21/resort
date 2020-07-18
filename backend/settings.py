@@ -27,6 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'knox',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +63,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    # 'DEFAULT_PERMISSION_CLASSES': [],
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

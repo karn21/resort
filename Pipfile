@@ -11,6 +11,7 @@ django-heroku = "*"
 whitenoise = "*"
 gunicorn = "*"
 djangorestframework = "*"
+django-rest-knox = "*"
 
 [requires]
 python_version = "3.6"
