@@ -13,6 +13,16 @@ def message(msg):
   return {"message":msg}
 
 
+class UserAPIView(APIView):
+  permission_classes = [IsAuthenticated,]
+  def get(self,request):
+    try:
+      user = authenticate(username=request.data["email"],password=request.data["password"])
+      user_data = UserSerializer(user).data
+      return Response(user_data,status=status.HTTP_200_OK)
+    except:
+      return Response(message("No token provided"),status=status.HTTP_401_UNAUTHORIZED)
+
 class RegisterAPIView(APIView):
   serializer_class = UserRegisterSerializer
   def post(self,request):

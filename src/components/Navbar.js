@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import logo from "../images/logo.svg";
 import { Link } from "react-router-dom";
 import { FaAlignRight } from "react-icons/fa";
+import { connect } from "react-redux";
+import propTypes from "prop-types";
 
 class Navbar extends Component {
+  static propTypes = {
+    isAuthenticated: propTypes.bool,
+  };
+
   state = {
     isOpen: false,
   };
@@ -35,9 +41,20 @@ class Navbar extends Component {
             <li>
               <Link to="/rooms/">Rooms</Link>
             </li>
-            <li>
-              <Link to="/login/">Login</Link>
-            </li>
+            {this.props.isAuthenticated ? (
+              <li>
+                <Link to="/logout/">Logout</Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login/">Login</Link>
+                </li>
+                <li>
+                  <Link to="/register/">Register</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
@@ -45,4 +62,8 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const matchStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(matchStateToProps)(Navbar);
