@@ -1,0 +1,62 @@
+@import "../../App.css";
+
+section {
+  text-align: center;
+  justify-content: center;
+  vertical-align: center;
+}
+
+.form-container {
+  text-align: center;
+  justify-content: center;
+  margin: 3rem auto;
+  width: 30rem;
+  border: 1px solid rgb(218, 218, 218);
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 1px 2px 5px #e5e5e5;
+}
+
+.field-group {
+  padding: 0.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-group label {
+  padding: 0.5rem;
+}
+
+.field-group input[type="text"],
+input[type="password"],
+input[type="email"] {
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  border: 1px solid #a5a5a5;
+  transition: var(--mainTransition);
+}
+
+.field-group input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  outline: none;
+  border-color: var(--primaryColor);
+}
+
+button {
+  width: 95%;
+  background-color: var(--primaryColor);
+  color: #fff;
+  padding: 0.6rem 0;
+  margin: 1.5rem 0;
+  border: none;
+  border-radius: 0.3rem;
+  transition: var(--mainTransition);
+  box-shadow: 1px 2px 5px #5d6fc5;
+}
+
+button:hover {
+  background-color: #5d6fc5;
+  cursor: pointer;
+}

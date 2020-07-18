@@ -29,6 +29,8 @@ class RegisterAPIView(APIView):
       serializer = UserSerializer(user)
       return Response(serializer.data,status=status.HTTP_201_CREATED)
 
+
+
 class LoginAPIView(APIView):
   def post(self,request):
     username = request.data["email"]
