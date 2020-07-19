@@ -1,6 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { register } from "../../actions/Auth";
+import propTypes from "prop-types";
 
 export class Signup extends Component {
+  static propTypes = {
+    register: propTypes.func,
+  };
+
   state = {
     firstname: "",
     lastname: "",
@@ -15,21 +22,39 @@ export class Signup extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.register(
+      this.state.email,
+      this.state.firstname,
+      this.state.lastname,
+      this.state.password1
+    );
+  };
+
   render() {
     return (
       <section>
         <div className="form-container">
-          <form action="">
+          <form onSubmit={this.handleSubmit}>
             <div className="field-group">
               <label htmlFor="email">Email *</label>
-              <input type="email" name="email" placeholder="Enter your email" />
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
             </div>
             <div className="field-group">
               <label htmlFor="firstname">First Name *</label>
               <input
                 type="text"
                 name="firstname"
-                placeholder="Enter your username"
+                placeholder="Enter your firstname"
+                value={this.state.firstname}
+                onChange={this.handleChange}
               />
             </div>
             <div className="field-group">
@@ -37,7 +62,9 @@ export class Signup extends Component {
               <input
                 type="text"
                 name="lastname"
-                placeholder="Enter your username"
+                placeholder="Enter your lastname"
+                value={this.state.lastname}
+                onChange={this.handleChange}
               />
             </div>
             <div className="field-group">
@@ -46,6 +73,8 @@ export class Signup extends Component {
                 type="password"
                 name="password1"
                 placeholder="Enter your password"
+                value={this.state.password1}
+                onChange={this.handleChange}
               />
             </div>
             <div className="field-group">
@@ -54,6 +83,8 @@ export class Signup extends Component {
                 type="password"
                 name="password2"
                 placeholder="Enter password again"
+                value={this.state.password2}
+                onChange={this.handleChange}
               />
             </div>
             <button type="submit">Signup</button>
@@ -64,4 +95,4 @@ export class Signup extends Component {
   }
 }
 
-export default Signup;
+export default connect(null, { register })(Signup);

@@ -21,13 +21,13 @@ class UserAPIView(APIView):
       user_data = UserSerializer(user).data
       return Response(user_data,status=status.HTTP_200_OK)
     except:
-      return Response(message("No token provided"),status=status.HTTP_401_UNAUTHORIZED)
+      return Response(message("No authentication token provided"),status=status.HTTP_401_UNAUTHORIZED)
 
 class RegisterAPIView(APIView):
   serializer_class = UserRegisterSerializer
   def post(self,request):
-    first_name = request.data['first_name']
-    last_name = request.data['last_name']
+    first_name = request.data['firstname']
+    last_name = request.data['lastname']
     email = request.data['email']
     password = request.data['password']
     try:

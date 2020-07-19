@@ -4,20 +4,22 @@ import {
   USER_LOADED,
   LOGIN_SUCCESS,
   LOGOUT,
+  REGISTER_SUCCESS,
 } from "../actions/ActionTypes";
 import axios from "axios";
 
 // helper method to get request config
-const getConfig = (getState) => {
+const getConfig = (getState = null) => {
   const headers = {
     "Content-Type": "application/json",
   };
-  const token = getState().auth.token;
-  if (token) {
-    headers["Authorization"] = `Token ${token}`;
+  if (getState) {
+    const token = getState().auth.token;
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
   }
-  const config = { headers };
-  return config;
+  return { headers };
 };
 
 export const loadUser = () => (dispatch, getState) => {
@@ -56,9 +58,28 @@ export const logout = () => (dispatch, getState) => {
   dispatch({ type: AUTH_START });
   const config = getConfig(getState);
   axios
-    .get("/api/accounts/logout", config)
+    .get("/api/accounts/logout/", config)
     .then((res) => {
       dispatch({ type: LOGOUT });
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const register = (email, firstname, lastname, password) => (
+  dispatch
+) => {
+  dispatch({ type: AUTH_START });
+  const config = getConfig();
+  const data = JSON.stringify({ email, firstname, lastname, password });
+  axios
+    .post("/api/accounts/register/", data, config)
+    .then((res) => {
+      dispatch({ type: REGISTER_SUCCESS });
+      setTimeout(() => {
+        window.location.href = "/login/";
+      }, 3000);
+
       console.log(res.data);
     })
     .catch((err) => console.log(err));
