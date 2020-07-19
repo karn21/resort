@@ -1,22 +1,28 @@
 import {
   AUTH_START,
   AUTH_FAIL,
-  AUTH_SUCCESS,
   USER_LOADED,
   LOGIN_SUCCESS,
+  LOGOUT,
 } from "../actions/ActionTypes";
 import axios from "axios";
 
-export const loadUser = () => (dispatch, getState) => {
-  dispatch({ type: AUTH_START });
-  const token = getState().auth.token;
+// helper method to get request config
+const getConfig = (getState) => {
   const headers = {
     "Content-Type": "application/json",
   };
+  const token = getState().auth.token;
   if (token) {
     headers["Authorization"] = `Token ${token}`;
   }
   const config = { headers };
+  return config;
+};
+
+export const loadUser = () => (dispatch, getState) => {
+  dispatch({ type: AUTH_START });
+  const config = getConfig(getState);
   axios
     .get("/api/accounts/user/", config)
     .then((res) => {
@@ -44,4 +50,16 @@ export const login = (email, password) => (dispatch) => {
       dispatch({ type: AUTH_FAIL });
       console.log(err.response.data);
     });
+};
+
+export const logout = () => (dispatch, getState) => {
+  dispatch({ type: AUTH_START });
+  const config = getConfig(getState);
+  axios
+    .get("/api/accounts/logout", config)
+    .then((res) => {
+      dispatch({ type: LOGOUT });
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
 };

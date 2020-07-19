@@ -3,11 +3,13 @@ import logo from "../images/logo.svg";
 import { Link } from "react-router-dom";
 import { FaAlignRight } from "react-icons/fa";
 import { connect } from "react-redux";
+import { logout } from "../actions/Auth";
 import propTypes from "prop-types";
 
 class Navbar extends Component {
   static propTypes = {
     isAuthenticated: propTypes.bool,
+    logout: propTypes.func,
   };
 
   state = {
@@ -43,7 +45,9 @@ class Navbar extends Component {
             </li>
             {this.props.isAuthenticated ? (
               <li>
-                <Link to="/logout/">Logout</Link>
+                <a href="#" onClick={this.props.logout}>
+                  Logout
+                </a>
               </li>
             ) : (
               <>
@@ -66,4 +70,4 @@ const matchStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(matchStateToProps)(Navbar);
+export default connect(matchStateToProps, { logout })(Navbar);

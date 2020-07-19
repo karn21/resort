@@ -3,8 +3,14 @@ import "./auth.css";
 import { login } from "../../actions/Auth";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import propTypes from "prop-types";
 
 export class Login extends Component {
+  static propTypes = {
+    login: propTypes.func,
+    isAuthenticated: propTypes.bool,
+  };
+
   state = {
     email: "",
     password: "",

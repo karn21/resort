@@ -4,6 +4,7 @@ import {
   LOGIN_SUCCESS,
   USER_LOADED,
   AUTH_FAIL,
+  LOGOUT,
 } from "../actions/ActionTypes";
 
 const initialState = {
@@ -17,7 +18,7 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case AUTH_START:
       return {
-        ...initialState,
+        ...state,
         isLoading: true,
       };
     case AUTH_FAIL:
@@ -41,6 +42,16 @@ export default function (state = initialState, action) {
         user: action.payload.user,
         token: action.payload.token,
       };
+    case LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        ...initialState,
+        isAuthenticated: false,
+        user: null,
+        token: null,
+        isLoading: false,
+      };
+
     default:
       return state;
   }

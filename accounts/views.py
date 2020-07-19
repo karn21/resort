@@ -17,7 +17,7 @@ class UserAPIView(APIView):
   permission_classes = [IsAuthenticated,]
   def get(self,request):
     try:
-      user = authenticate(username=request.data["email"],password=request.data["password"])
+      user = request.user
       user_data = UserSerializer(user).data
       return Response(user_data,status=status.HTTP_200_OK)
     except:
@@ -64,3 +64,17 @@ class LoginAPIView(APIView):
     except:
       return Response(message("User does not exists"),status=status.HTTP_404_NOT_FOUND)
 
+
+class LogoutAPIView(APIView):
+  permission_classes = [IsAuthenticated,]
+  def get(self,request):
+    try:
+      user = authenticate(username=request.GET["email"],password=request.GET["password"])
+      if(user):
+        token = Token.objects.get(user=user)
+        token.delete()
+        return Response(message("Logged out successfully."),status=status.HTTP_200_OK)
+      else:
+        return Response(message("Invalid authentication token"),status=status.HTTP_400_BAD_REQUEST)
+    except:
+      return Response(message("User does not exists"),status=status.HTTP_404_NOT_FOUND)

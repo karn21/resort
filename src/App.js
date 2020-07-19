@@ -27,7 +27,7 @@ class App extends Component {
             <Route path="/rooms" exact component={Rooms}></Route>
             <Route path="/rooms/:slug" exact component={SingleRoom}></Route>
             <Route path="/login" exact component={Login}></Route>
-            <Route path="/signup" exact component={Signup}></Route>
+            <Route path="/register" exact component={Signup}></Route>
             <Route component={Error}></Route>
           </Switch>
         </Provider>
