@@ -1,6 +1,5 @@
 import {
   AUTH_START,
-  LOGIN_FAIL,
   LOGIN_SUCCESS,
   USER_LOADED,
   AUTH_FAIL,

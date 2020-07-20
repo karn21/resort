@@ -15,6 +15,7 @@ import "toastr/build/toastr.min.css";
 import toastr from "toastr/build/toastr.min";
 import { connect } from "react-redux";
 import { clearError } from "./actions/Message";
+import propTypes from "prop-types";
 
 toastr.options = {
   closeButton: true,
@@ -35,6 +36,12 @@ toastr.options = {
 };
 
 class App extends Component {
+  static propTypes = {
+    msg: propTypes.object,
+    error: propTypes.string,
+    clearError: propTypes.func,
+  };
+
   componentDidMount() {
     store.dispatch(loadUser());
   }

@@ -52,7 +52,6 @@ export const login = (email, password) => (dispatch) => {
     .catch((err) => {
       dispatch({ type: AUTH_FAIL });
       dispatch(createError(err.response.data.message));
-      console.log(err.response.data);
     });
 };
 
@@ -80,9 +79,15 @@ export const register = (email, firstname, lastname, password) => (
       dispatch({ type: REGISTER_SUCCESS });
       setTimeout(() => {
         window.location.href = "/login/";
-      }, 3000);
-
-      console.log(res.data);
+      }, 1000);
+      dispatch(
+        createMessage(
+          "Your account has been created. You can now log in",
+          "success"
+        )
+      );
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      dispatch(createError(err.response.data.message));
+    });
 };

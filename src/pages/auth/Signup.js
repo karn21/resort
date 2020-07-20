@@ -15,9 +15,33 @@ export class Signup extends Component {
     email: "",
     password1: "",
     password2: "",
+    username_error: false,
+    password_error: false,
   };
 
   handleChange = (e) => {
+    switch (e.target.name) {
+      case "password1":
+        this.state.password2 === e.target.value
+          ? this.setState({
+              password_error: false,
+            })
+          : this.setState({
+              password_error: true,
+            });
+        break;
+      case "password2":
+        this.state.password1 === e.target.value
+          ? this.setState({
+              password_error: false,
+            })
+          : this.setState({
+              password_error: true,
+            });
+        break;
+      default:
+        return;
+    }
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -25,12 +49,18 @@ export class Signup extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.register(
-      this.state.email,
-      this.state.firstname,
-      this.state.lastname,
-      this.state.password1
-    );
+    if (this.state.password1 === this.state.password2) {
+      this.props.register(
+        this.state.email,
+        this.state.firstname,
+        this.state.lastname,
+        this.state.password1
+      );
+    } else {
+      this.setState({
+        password_error: true,
+      });
+    }
   };
 
   render() {
@@ -88,7 +118,13 @@ export class Signup extends Component {
                   value={this.state.password2}
                   onChange={this.handleChange}
                 />
+                {this.state.password_error && (
+                  <p style={{ color: "#F58F1B", textAlign: "left" }}>
+                    The passwords do not match
+                  </p>
+                )}
               </div>
+
               <button type="submit">Signup</button>
             </form>
           </div>
