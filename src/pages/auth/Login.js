@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import propTypes from "prop-types";
 import Hero from "../../components/Hero";
-import Banner from "../../components/Banner";
 
 export class Login extends Component {
   static propTypes = {

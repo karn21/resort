@@ -124,7 +124,7 @@ USE_TZ = True
 
 
 
-
+django_heroku.settings(locals())
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,"build","static")
 STATICFILES_DIRS = []
@@ -132,4 +132,4 @@ STATICFILES_DIRS = []
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"build","media")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-django_heroku.settings(locals())
+

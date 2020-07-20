@@ -1,7 +1,8 @@
-import { CREATE_MESSAGE } from "../actions/ActionTypes";
+import { CREATE_MESSAGE, CREATE_ERROR } from "../actions/ActionTypes";
 
 const initialState = {
   message: { text: "", type: "" },
+  error: "",
 };
 
 export default function (state = initialState, action) {
@@ -10,6 +11,11 @@ export default function (state = initialState, action) {
       return {
         ...initialState,
         message: action.payload,
+      };
+    case CREATE_ERROR:
+      return {
+        ...initialState,
+        error: action.payload,
       };
     default:
       return {

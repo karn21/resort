@@ -7,7 +7,7 @@ import {
   REGISTER_SUCCESS,
 } from "../actions/ActionTypes";
 import axios from "axios";
-import { createMessage } from "./Message";
+import { createMessage, createError } from "./Message";
 
 // helper method to get request config
 const getConfig = (getState = null) => {
@@ -33,7 +33,8 @@ export const loadUser = () => (dispatch, getState) => {
     })
     .catch((err) => {
       dispatch({ type: AUTH_FAIL });
-      console.log(err);
+      console.log(err.response.data);
+      dispatch(createError(err.response.data.msg));
     });
 };
 
