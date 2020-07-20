@@ -1,5 +1,9 @@
 import { CREATE_MESSAGE } from "../actions/ActionTypes";
 
-export const createMessage = (message) => (dispatch) => {
-  dispatch({ type: CREATE_MESSAGE, payload: message });
+export const createMessage = (message, type = "info") => (dispatch) => {
+  const payload = {
+    text: message,
+    type: type,
+  };
+  dispatch({ type: CREATE_MESSAGE, payload: payload });
 };

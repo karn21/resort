@@ -40,7 +40,13 @@ class App extends Component {
 
   componentWillReceiveProps(props) {
     if (props.msg) {
-      toastr.info(props.msg);
+      if (props.msg.type === "success") {
+        toastr.success(props.msg.text);
+      } else if (props.msg.type === "success") {
+        toastr.warning(props.msg.text);
+      } else {
+        toastr.info(props.msg.text);
+      }
     }
   }
 

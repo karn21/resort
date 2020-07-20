@@ -48,7 +48,7 @@ export const login = (email, password) => (dispatch) => {
     .post("/api/accounts/login/", body, config)
     .then((res) => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-      dispatch(createMessage("You are now logged in!"));
+      dispatch(createMessage("You are now logged in!", "success"));
     })
     .catch((err) => {
       dispatch({ type: AUTH_FAIL });
@@ -63,7 +63,7 @@ export const logout = () => (dispatch, getState) => {
     .get("/api/accounts/logout", config)
     .then((res) => {
       dispatch({ type: LOGOUT });
-      dispatch(createMessage("Logged out successfully"));
+      dispatch(createMessage("Logged out successfully", "success"));
     })
     .catch((err) => console.log(err));
 };

@@ -1,7 +1,7 @@
 import { CREATE_MESSAGE } from "../actions/ActionTypes";
 
 const initialState = {
-  message: "",
+  message: { text: "", type: "" },
 };
 
 export default function (state = initialState, action) {
