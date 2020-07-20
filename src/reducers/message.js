@@ -1,4 +1,8 @@
-import { CREATE_MESSAGE, CREATE_ERROR } from "../actions/ActionTypes";
+import {
+  CREATE_MESSAGE,
+  CREATE_ERROR,
+  CLEAR_ERROR,
+} from "../actions/ActionTypes";
 
 const initialState = {
   message: { text: "", type: "" },
@@ -9,13 +13,18 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case CREATE_MESSAGE:
       return {
-        ...initialState,
+        ...state,
         message: action.payload,
       };
     case CREATE_ERROR:
       return {
-        ...initialState,
+        ...state,
         error: action.payload,
+      };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: "",
       };
     default:
       return {

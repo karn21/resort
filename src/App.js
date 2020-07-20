@@ -14,6 +14,7 @@ import { loadUser } from "./actions/Auth";
 import "toastr/build/toastr.min.css";
 import toastr from "toastr/build/toastr.min";
 import { connect } from "react-redux";
+import { clearError } from "./actions/Message";
 
 toastr.options = {
   closeButton: true,
@@ -38,15 +39,22 @@ class App extends Component {
     store.dispatch(loadUser());
   }
 
-  componentWillReceiveProps(props) {
-    if (props.msg) {
-      if (props.msg.type === "success") {
-        toastr.success(props.msg.text);
-      } else if (props.msg.type === "success") {
-        toastr.warning(props.msg.text);
-      } else {
-        toastr.info(props.msg.text);
+  componentDidUpdate(prevProps) {
+    if (prevProps.msg !== this.props.msg) {
+      if (this.props.msg) {
+        if (this.props.msg.type === "success") {
+          toastr.success(this.props.msg.text);
+        } else if (this.props.msg.type === "success") {
+          toastr.warning(this.props.msg.text);
+        } else {
+          toastr.info(this.props.msg.text);
+        }
       }
+    }
+
+    if (this.props.error) {
+      toastr.error(this.props.error);
+      this.props.clearError();
     }
   }
 
@@ -69,6 +77,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   msg: state.message.message,
+  error: state.message.error,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { clearError })(App);

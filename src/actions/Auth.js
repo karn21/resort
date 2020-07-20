@@ -33,8 +33,6 @@ export const loadUser = () => (dispatch, getState) => {
     })
     .catch((err) => {
       dispatch({ type: AUTH_FAIL });
-      console.log(err.response.data);
-      dispatch(createError(err.response.data.msg));
     });
 };
 
@@ -53,6 +51,7 @@ export const login = (email, password) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: AUTH_FAIL });
+      dispatch(createError(err.response.data.message));
       console.log(err.response.data);
     });
 };

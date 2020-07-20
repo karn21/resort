@@ -1,4 +1,8 @@
-import { CREATE_MESSAGE, CREATE_ERROR } from "../actions/ActionTypes";
+import {
+  CREATE_MESSAGE,
+  CREATE_ERROR,
+  CLEAR_ERROR,
+} from "../actions/ActionTypes";
 
 export const createMessage = (message, type = "info") => (dispatch) => {
   const payload = {
@@ -10,4 +14,8 @@ export const createMessage = (message, type = "info") => (dispatch) => {
 
 export const createError = (err) => (dispatch) => {
   dispatch({ type: CREATE_ERROR, payload: err });
+};
+
+export const clearError = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERROR });
 };
