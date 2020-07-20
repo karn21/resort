@@ -58,7 +58,7 @@ export const logout = () => (dispatch, getState) => {
   dispatch({ type: AUTH_START });
   const config = getConfig(getState);
   axios
-    .get("/api/accounts/logout/", config)
+    .get("/api/accounts/logout", config)
     .then((res) => {
       dispatch({ type: LOGOUT });
       console.log(res.data);
